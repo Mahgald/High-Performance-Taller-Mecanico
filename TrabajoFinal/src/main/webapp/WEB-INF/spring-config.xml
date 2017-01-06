@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd  
+  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+  http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd  
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<!-- Mapping para CSS --><!-- Le digo que en la carpeta resource/ estan los archivos css -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	
+	<mvc:annotation-driven />
+	
+	
+	<!-- Paquete donde estaran nuestros controllers -->
+	<context:component-scan base-package="controller" />
+		
+	<!-- Propiedades DB -->
+	<context:property-placeholder location="classpath:database.properties" />
+	
+	<!-- 
+		Fuente de datos - Los valores se obtendran del archivo declarado arriba.
+		No es obligatorio el uso de un archivo separado. 
+	-->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${database.driver}" />
+		<property name="url" value="${database.url}" />
+		<property name="username" value="${database.user}" />
+		<property name="password" value="${database.password}" />
+	</bean>
+
+	<!-- En vez de establecer una clase aparte, la definimos como un bean -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<!-- Aca pondremos las clases que mapeemos -->
+				<value>model.Empleado</value>
+				<value>model.Propietario</value>
+				<value>model.Repuesto</value>
+				<value>model.OrdenDeTrabajo</value>
+				<value>model.OrdenRepuesto</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- 
+		Resuelve los archivos que se van a usar para las vistas, en este caso todo lo que posea Extension 'jsp'.
+	 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/view/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- DAOs -->
+	<bean id="empleadoDAO" class="data.EmpleadoDAO" />
+	<bean id="ordentrabajoDAO"	class="data.OrdenDeTrabajoDAO"/>
+	<bean id="propietarioDAO" class="data.PropietarioDAO" />
+	<bean id="repuestoDAO" class="data.RepuestoDAO" />
+	<bean id="ordenrepuestoDAO" class="data.OrdenRepuestoDAO" />
+	
+	<!-- Services -->
+	<bean id="empleadoService" class="service.EmpleadoService" />
+	<bean id="propietarioService" class="service.PropietarioService" />
+	<bean id="ordenService" class="service.OrdenDeTrabajoService" />
+	<bean id="repuestoService" class="service.RepuestoService" />
+	
+</beans>  
