@@ -49,13 +49,13 @@ body{
 <div class="col-md-8 col-md-offset-2">
 	<h1>El propietario no se encuentra registrado</h1>
 	<h3>Registre nuevo propietario</h3>
-	<form:form action="NuevoPropietario" method="post" modelAttribute="propietario" class="form-horizontal">
+	<form:form action="NuevoPropietario" method="post" modelAttribute="propietario" id="formularioPropietario" class="form-horizontal formulario">
 		
 		
 		<div class="form-group">
 		<form:label class="control-label col-sm-2" path="dni">DNI: </form:label>
 		<div class="col-sm-6">
-		<form:input class="form-control" path="dni"/>
+		<form:input class="form-control" path="dni" id="dni"/>
 		<br>
 		</div>
 		</div>
@@ -64,16 +64,18 @@ body{
 		<div class="form-group">
 		<form:label class="control-label col-sm-2" path="nombre">Nombre: </form:label>
 		<div class="col-sm-6">
-		<form:input class="form-control" path="nombre" />
+		<form:input class="form-control" path="nombre" id="nombre" placeholder="Nombre"/>
 		<br>
+		
 		</div>
+		
 		</div>
-
+		
 
 <div class="form-group">
 		<form:label class="control-label col-sm-2" path="apellido">Apellido: </form:label>
 		<div class="col-sm-6">
-		<form:input class="form-control" path="apellido" />
+		<form:input class="form-control" path="apellido" id="apellido" placeholder="Apellido"/>
 		<br>
 		</div> 
 		</div>
@@ -83,7 +85,7 @@ body{
 <div class="form-group">
 		<form:label class="control-label col-sm-2" path="direccion">Direccion: </form:label>
 		<div class="col-sm-6">
-		<form:input class="form-control" path="direccion" />
+		<form:input class="form-control" path="direccion" id="direccion" placeholder="Direccion"/>
 		<br>
 		</div>
 		</div>
@@ -93,17 +95,18 @@ body{
 <div class="form-group">
 		<form:label class="control-label col-sm-2" path="telefono">Telefono: </form:label>
 		<div class="col-sm-6">
-		<form:input class="form-control" path="telefono" />
+		<form:input class="form-control" path="telefono" id="telefono" placeholder="Sin 0 ni 15: 2264 882055"/>
 		<br>
 	</div>
 	</div>
-
-
-
+<div class="form-group">
+<div class="col-sm-6 col-sm-offset-2">
+ <div class="error" id="error"></div>
+</div>
+	</div>	
 		<div class="form-group">
 				<div class="col-sm-6 col-sm-offset-2">
-					<input type="submit" class="btn btn-danger form-control"
-						value="Registrar" />
+					<input type="submit" class="btn btn-danger form-control" value="Registrar" />
 				</div>
 			</div>
 	</form:form>
@@ -128,7 +131,8 @@ body{
   </div>
 </nav>
 </div>
+	<script src="<%=request.getContextPath()%>/resources/js/nuevoPropietario.js"></script>
 	<script src="<%=request.getContextPath()%>/resources/js/jquery224.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -7,11 +7,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<link rel="stylesheet"	href="<%=request.getContextPath()%>/resources/css/flatly.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap-social.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styles.css">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/flatly.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/bootstrap-social.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/css/styles.css">
 </head>
 <title>Ordenes Sin Finalizar</title>
 
@@ -19,22 +24,28 @@
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<%=request.getContextPath()%>">High Performance Taller Mecanico</a>
+				<a class="navbar-brand" href="<%=request.getContextPath()%>">High
+					Performance Taller Mecanico</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li ><a href="<%=request.getContextPath()%>/">Home</a></li>
-					<li><a href="<%=request.getContextPath()%>/Empleado/">Lista Empleados</a></li>
-					<li><a href="<%=request.getContextPath()%>/Propietario/">Lista Propietarios</a></li>
-					<li><a href="<%=request.getContextPath()%>/Repuesto/">Lista Repuestos</a></li>
-					<li class="active"><a href="<%=request.getContextPath()%>/OrdenTrabajo/">Lista Ordenes de Trabajo</a></li>
+					<li><a href="<%=request.getContextPath()%>/">Home</a></li>
+					<li><a href="<%=request.getContextPath()%>/Empleado/">Lista
+							Empleados</a></li>
+					<li><a href="<%=request.getContextPath()%>/Propietario/">Lista
+							Propietarios</a></li>
+					<li><a href="<%=request.getContextPath()%>/Repuesto/">Lista
+							Repuestos</a></li>
+					<li class="active"><a
+						href="<%=request.getContextPath()%>/OrdenTrabajo/">Lista
+							Ordenes de Trabajo</a></li>
 				</ul>
 			</div>
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
 
-<style type="text/css">
+	<style type="text/css">
 body {
 	margin-top: 30px;
 }
@@ -57,7 +68,7 @@ body {
 					<th>Empleado</th>
 					<th>Repuestos</th>
 				</tr>
-			
+
 			</thead>
 			<tbody>
 				<c:if test="${!empty listaOrdenTrabajo}">
@@ -71,11 +82,14 @@ body {
 							<c:if test="${!orden.estado}">
 								<td><c:out value="Sin Terminar"></c:out></td>
 							</c:if>
-												
-							<td><c:out value="${orden.propietario.nombre} ${orden.propietario.apellido}"></c:out></td>
+
+							<td><c:out
+									value="${orden.propietario.nombre} ${orden.propietario.apellido}"></c:out></td>
 							<td><c:out value="${orden.empleado.nombre}"></c:out></td>
-							<td><a href="<%=request.getContextPath()%>/OrdenRepuesto/SinFinalizar/${orden.id}" class="btn btn-primary">Utilizados</a></td>
-							
+							<td><a
+								href="<%=request.getContextPath()%>/OrdenRepuesto/SinFinalizar/${orden.id}"
+								class="btn btn-primary">Utilizados</a></td>
+
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -86,84 +100,108 @@ body {
 				</c:if>
 			</tbody>
 		</table>
-	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#horasTrabajadas">Finalizar</button>
-	<a class="btn btn-danger" href="<%=request.getContextPath()%>/OrdenTrabajo/">Volver</a>
-	
-</div>
+		<button type="button" class="btn btn-success" data-toggle="modal"
+			data-target="#horasTrabajadas">Finalizar</button>
+		<a class="btn btn-danger"
+			href="<%=request.getContextPath()%>/OrdenTrabajo/">Volver</a>
 
-
-<!-- Modal -->
-<div id="horasTrabajadas" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Finalizando Orden De Trabajo - Ingrese Horas Trabajadas</h4>
-      </div>
-      <div class="modal-body">
-        
-      <form:form action="Finalizar" method="get" modelAttribute="ordenFinal" class="form-horizontal">
-		
-		<div class="form-group">
-		<form:label class="control-label col-sm-4" path="id">Id de la Orden: </form:label>
-		<div class="col-sm-6">
-		<form:input path="id" />
-		</div>
-		</div>
-		
-		<div class="form-group">
-		<form:label class="control-label col-sm-4" path="cantHoras">Horas Trabajadas: </form:label>
-		<div class="col-sm-6">
-		<form:input path="cantHoras" value="1"/>
-		</div>
-		</div>
-		<br><br><br>
-      
-      <div class="modal-footer">
-      	<button type="submit" class="btn btn-default"> Aceptar</button> 
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-      </div>
-      </form:form>
-    </div>
-	
 	</div>
-  </div>
-</div>
 
 
+	<!-- Modal -->
+	<div id="horasTrabajadas" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Finalizando Orden De Trabajo - Ingrese
+						Horas Trabajadas</h4>
+				</div>
+				<div class="modal-body">
+
+					<form:form action="Finalizar" method="get"
+						modelAttribute="ordenFinal" class="form-horizontal formulario" id="formularioSinTerminar">
+
+						<%-- <div class="form-group">
+							<form:label class="control-label col-sm-4" path="id">Id de la Orden: </form:label>
+							<div class="col-sm-6">
+								<form:input path="id" id="idOrden"/>
+							</div>
+						</div> --%>
+
+						<div class="form-group">
+							<form:label class="control-label col-sm-4" path="id">Orden de Trabajo: </form:label>
+							<div class="col-sm-6">
+								<form:select class="form-control" path="id" id="idOrden">
+
+									<form:option value="0">Seleccione Orden de Trabajo</form:option>
+
+									<c:forEach items="${listaOrdenTrabajo}" var="orden">
+										<form:option value="${orden.id}">
+											<c:out value="Orden: ${orden.id} - Falla: ${orden.detalle_Falla}"></c:out>
+										</form:option>
+
+									</c:forEach>
+								</form:select>
+							</div>
+						</div>
 
 
+						<div class="form-group">
+							<form:label class="control-label col-sm-4" path="cantHoras">Horas Trabajadas: </form:label>
+							<div class="col-sm-6">
+								<form:input path="cantHoras" value="1" id="cantHoras"/>
+							</div>
+						</div>
+						
 
+						<div class="form-group">
+							<div class="col-sm-6 col-sm-offset-4">
+								<div class="error" id="error"></div>
+							</div>
+						</div>
 
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-default">Aceptar</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancelar</button>
+						</div>
+					</form:form>
+				</div>
 
+			</div>
+		</div>
+	</div>
 
+	<div class="footer-margin">
 
-
-
-
-
-
-
-<div class="footer-margin">
-
-	<nav class="navbar navbar-default navbar-fixed-bottom ">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Proyecto Final - Ricardo Surribas</a>
-    </div>
-    <div class="btn-group navbuttons">
-    	<a href="https://www.Github.com/Mahgald" target="_blank" class="btn btn-sm btn-block btn-social btn-github"> <span class="fa fa-github"></span>GitHub</a>
-    </div>	
-    <div class="btn-group navbuttons">
-    	<a href="https://ar.linkedin.com/in/ricardo-surribas" target="_blank" class="btn btn-sm btn-block btn-social btn-linkedin"> <span class="fa fa-linkedin"></span>Linkedin</a>
-    </div>
-  </div>
-</nav>
-</div>
-<script src="<%=request.getContextPath()%>/resources/js/jquery224.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
-
+		<nav class="navbar navbar-default navbar-fixed-bottom ">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Proyecto Final - Ricardo
+						Surribas</a>
+				</div>
+				<div class="btn-group navbuttons">
+					<a href="https://www.Github.com/Mahgald" target="_blank"
+						class="btn btn-sm btn-block btn-social btn-github"> <span
+						class="fa fa-github"></span>GitHub
+					</a>
+				</div>
+				<div class="btn-group navbuttons">
+					<a href="https://ar.linkedin.com/in/ricardo-surribas"
+						target="_blank"
+						class="btn btn-sm btn-block btn-social btn-linkedin"> <span
+						class="fa fa-linkedin"></span>Linkedin
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<script src="<%=request.getContextPath()%>/resources/js/jquery224.js"></script>
+	<script	src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
+	<script	src="<%=request.getContextPath()%>/resources/js/sinTerminar.js"></script>
+	
 </body>
 </html>

@@ -108,11 +108,12 @@ body{
       </div>
       <div class="modal-body">
         
-      <form:form action="../Propietario/BuscarPropietario" method="get" modelAttribute="propietario">
+      <form:form action="../Propietario/BuscarPropietario" method="get" modelAttribute="propietario" id="formularioBusqueda" class="formulario">
 		<form:label path="dni">DNI: </form:label>
-		<form:input path="dni" />
+		<form:input path="dni" id="dni"/>
 		<br><br><br>
-      
+      <div class="error" id="error"></div>
+      <br><br><br>	
       <div class="modal-footer">
       	<button type="submit" class="btn btn-default"> Buscar</button> 
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -141,6 +142,7 @@ body{
   </div>
 </nav>
 </div>
+<script src="<%=request.getContextPath()%>/resources/js/buscarPropietario.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery224.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 
